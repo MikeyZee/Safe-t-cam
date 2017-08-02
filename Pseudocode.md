@@ -1,22 +1,25 @@
 <!DOCTYPE Pseudocode>
 
 BEGIN AQUIREINFORMATION
+  import textfile #this should be done first before your previous 3 lines right?
   Get distance1
   Get distance 2
   Get SPEED_LIMIT
-  import textfile
-  Counter = number or lines in textfile -1
+
 END
 
 BEGIN NUMBERPLATES
+#Seeing that the textfile was imported in the previous subroutine, how is it accessed again here?
+#Remember the scope of variables.
+#What are you trying to achieve here?
   FOR every line in textfile
-    split line
+    split line #you can't do this in pseudocode.
     append textfile[2] to numberplates[]
 END
 
 BEGIN TIMES
   for every numberplate
-    get times passed through each checkpoint
+    get times passed through each checkpoint #you are going to have to write pseudocode to get this - keep a counter
     IF number plate passes through checkpoint1 and checkpoint2
       timetaken = checkpoint2time - checkpoint1time
       averagespeed = distance1 / timetaken
