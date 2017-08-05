@@ -13,7 +13,11 @@ TIME_FMT = "%H:%M:%S" # Format of times involved within the Script
 
 
 def main():
-    traffic = open("input.txt", "r") # import the data file
+    try:
+        traffic = open("input.txt", "r") # import the data file
+    except Exception as e:
+        print("Failed to find input.txt")
+        exit(1)
 
     traffic_list = traffic.readlines() # Creates a new list called traffic_list which comprises of the file traffic specified above
 
