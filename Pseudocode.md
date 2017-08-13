@@ -29,18 +29,18 @@ BEGIN checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list)
   WHILE counter <= number_of_logs ‘looping through the file
     DIM highway_times() #storing times of each numberplate at checkpoints
 		find all checkpoints each plate passed through
-    IF plate passed through checkpoint 1 and 2
+    IF plate passed through checkpoint 1 and 2 THEN
       calculate difference in time
       calculate average speed with distance/time
-      IF average speed > SPEED_LIMIT
+      IF average speed > SPEED_LIMIT THEN 
           add plate to speeding()
       ENDIF  
     ENDIF
     find all checkpoints each plate passed through
-    IF plate passed through checkpoint 2 and 3
+    IF plate passed through checkpoint 2 and 3 THEN
       calculate difference in time
       calculate average speed with distance/time
-      IF average speed > SPEED_LIMIT
+      IF average speed > SPEED_LIMIT THEN
         add plate to speeding()
       ENDIF
     ENDIF
