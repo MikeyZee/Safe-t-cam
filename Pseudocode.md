@@ -6,9 +6,9 @@ BEGIN MAINPROGRAM
   DIST_1 = 133 # Distance between Camera 1 and Camera 2
   DIST_2 = 57.5 # Distance between Camera 2 and Camera 3
   SPEED_LIMIT = 110 # Speed limit between all cameras
-  collectingNbPlates()
-  uniqueNbPlates = collectingNbPlates()
-  checkIfSpeeding()
+  collectingNbPlates(traffic_list, number_of_logs)
+  uniqueNbPlates = collectingNbPlates(traffic_list, number_of_logs)
+  checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list)
 END
 
 BEGIN ReadFromFile
