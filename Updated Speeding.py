@@ -14,32 +14,38 @@ TIME_FMT = "%H:%M:%S" # Format of times involved within the Script
 
 
 def main():
-    try:
-        traffic = open("input.txt", "r") # import the data file
-    except Exception as e:
-        print("Failed to find input.txt")
-        exit(1)
+    ReadFromFile() # Calls ReadFromFile function
+    traffic_list, number_of_logs = ReadFromFile() # receiving tuple to share variables
+    collectingNbPlates(traffic_list, number_of_logs) # calls my collectingNbPlates functions
+    uniqueNbPlates = collectingNbPlates(traffic_list, number_of_logs) # allows filled number_plates list to be passed as uniqueNbPlates
+    checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list) # Calls my checkIfSpeeding function
 
-    traffic_list = traffic.readlines() # Creates a new list called traffic_list which comprises of the file traffic specified above
-    number_of_logs = traffic_list[0].strip('\n') # This strips the text file of the "\n" which is the enter key to create a new line
-    collectingnumplates(traffic_list, number_of_logs)
-    uniquenumplates = collectingnumplates(traffic_list, number_of_logs)
-    checkifspeeding(uniquenumplates, number_of_logs, traffic_list)
+def ReadFromFile():
+        try:
+            traffic = open("input.txt", "r") # import the data file
+        except Exception as e:
+            print("Failed to find input.txt")
+            exit(1)
+
+        traffic_list = traffic.readlines() # Creates a new list called traffic_list which comprises of the file traffic specified above
+        number_of_logs = traffic_list[0].strip('\n') # This strips the text file of the "\n" which is the enter key to create a new line
+        return traffic_list, number_of_logs # Return paramaters using a tuple
 
 
-def collectingnumplates(traffic_list, number_of_logs): # collecting number plates
+
+def collectingNbPlates(traffic_list, number_of_logs): # collecting number plates
     number_plates = [] # Creating an empty list called number_plates
     for log_num in range(1, int(number_of_logs)+1):
         log = traffic_list[log_num].strip('\n')
         log_components = log.split() # SPlit separates log into a list for each line, with an index of 0,1,2 and so on
         if not log_components[2] in number_plates: # If the number plate found, isn't the list number_plates then add it
             number_plates.append(log_components[2])
-    return number_plates
+    return number_plates 
 
 
-def checkifspeeding(uniquenumplates, number_of_logs, traffic_list):
+def checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list):
     speeding = [] # Creating an empty list for speeding cars
-    for plate in uniquenumplates:
+    for plate in uniqueNbPlates:
         highway_times = {}  # Creating an empty dictionary
         for log_num in range(1, int(number_of_logs)+1):
             log = traffic_list[log_num].strip('\n') # \n = new line which is removed with .strip
@@ -47,8 +53,8 @@ def checkifspeeding(uniquenumplates, number_of_logs, traffic_list):
             if plate == log_components[2]:
                 highway_times.update({log_components[1]: log_components[0]})
         if '1' in highway_times and '2' in highway_times: # run this if the numberplate passes through checkpoint 1 and 2
-            time1obj = datetime.strptime(highway_times['1'], TIME_FMT) # Gets the time that the car passes through checkpoint 1
-            time2obj = datetime.strptime(highway_times['2'], TIME_FMT) # Gets the time that the car passes through checkpoint 2
+            time1obj = datetime.strptime(highway_times['1'], TIME_FMT) # Gets the time that the car passes through checkpoint 1 using key 1 of dictionary
+            time2obj = datetime.strptime(highway_times['2'], TIME_FMT) # Gets the time that the car passes through checkpoint 2 using key 2 of dictionary
             diffobj = time2obj - time1obj # Minus the later time from the earlier time to get difference or time taken to travel between them
             diff_hours = float(diffobj.seconds)/float(3600)
             avg_speed = DIST_1/diff_hours # calculates average speed of number plate between checkpoints 1 & 2
