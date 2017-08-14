@@ -27,22 +27,24 @@ BEGIN checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list)
   counter = 1 #initiate counter
   DIM speeding() # array for speeding cars
   WHILE counter <= number_of_logs ‘looping through the file
-    DIM highway_times() #storing times of each numberplate at checkpoints
-		find all checkpoints each plate passed through
-    IF plate passed through checkpoint 1 and 2 THEN
-      calculate difference in time
-      calculate average speed with distance/time
-      IF average speed > SPEED_LIMIT THEN 
-          add plate to speeding()
-      ENDIF  
-    ENDIF
-    find all checkpoints each plate passed through
-    IF plate passed through checkpoint 2 and 3 THEN
-      calculate difference in time
-      calculate average speed with distance/time
-      IF average speed > SPEED_LIMIT THEN
-        add plate to speeding()
-      ENDIF
+    DIM highway_times() #storing times of each numberplate at checkpoints 
+    findallcheckpoints(uniqueNbPlates)
+    	return checkPointsPerNumList
+    IF number of items in checkPointsPerNumList > 1 THEN
+   	 IF plate passed through checkpoint 1 and 2 THEN
+     		 calculate difference in time
+     		 calculate average speed with distance/time
+      		 IF average speed > SPEED_LIMIT THEN 
+          		add plate to speeding()
+     		 ENDIF  
+   	 ENDIF
+	 IF plate passed through checkpoint 2 and 3 THEN
+     		 calculate difference in time
+     		 calculate average speed with distance/time
+      		 IF average speed > SPEED_LIMIT THEN
+       			 add plate to speeding()
+    		 ENDIF
+   	 ENDIF
     ENDIF
   ENDWHILE
   close input.txt
