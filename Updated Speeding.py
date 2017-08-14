@@ -40,7 +40,7 @@ def collectingNbPlates(traffic_list, number_of_logs): # collecting number plates
         log_components = log.split() # SPlit separates log into a list for each line, with an index of 0,1,2 and so on
         if not log_components[2] in number_plates: # If the number plate found, isn't the list number_plates then add it
             number_plates.append(log_components[2])
-    return number_plates 
+    return number_plates
 
 
 def checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list):
