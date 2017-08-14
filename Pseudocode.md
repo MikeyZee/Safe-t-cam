@@ -46,6 +46,7 @@ BEGIN checkIfSpeeding(uniqueNbPlates, number_of_logs, traffic_list)
     		 ENDIF
    	 ENDIF
     ENDIF
+    counter = counter + 1
   ENDWHILE
   close input.txt
   print speeding
